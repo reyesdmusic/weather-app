@@ -4,13 +4,14 @@ import axios from 'axios';
 function App() {
   const [data, setData] = useState({});
   const [location, setLocation] = useState('');
+  const [error, setError] = useState(null);
 
   const searchLocation = (event) => {
     if (event.key === 'Enter') {
       axios.get("/api/weather", { params: { location } }).then((response) => {
         setData(response.data)
       }).catch(e => {
-        console.error(e)
+        setError({ hasError: true, status: e?.response?.status })
       })
       setLocation('')
     }
