@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { KeyboardEvent } from 'react';
 
 function App() {
-  const [data, setData] = useState({});
+  const [data, setData] = useState<any>({});
   const [location, setLocation] = useState('');
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<any>(null);
 
-  const searchLocation = (event) => {
+  const searchLocation = (event: KeyboardEvent) => {
     if (event.key === 'Enter') {
       axios.get("/api/weather", { params: { location } }).then((response) => {
         setData(response.data)
@@ -19,6 +20,7 @@ function App() {
 
   return (
     <div className="app">
+      <div>HELLO</div>
       <div className="search">
         <input
           value={location}
