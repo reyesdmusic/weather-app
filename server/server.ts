@@ -6,21 +6,12 @@ const axios = require("axios");
 
 // const GEO_LOCATE_URL = 'http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}'
 
-// http://api.openweathermap.org/geo/1.0/zip?zip=23221&appid=ff3af498ead27371a1dcb730a1c7e5a7
+// 
 const API_KEY = "ff3af498ead27371a1dcb730a1c7e5a7";
 app.get("/api/weather", (req: Request, res: Response) => {
   const location = req.query.location;
 
   if (!location) return;
-
-  // const GEO_LOCATE_URL = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=5&appid=${API_KEY}`;
-
-  // axios.get(GEO_LOCATE_URL).then((response) => {
-  //     if (response.data) {
-  //         console.log(response)
-  //         // const OPEN_WEATHER_URL = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=f${API_KEY}`;
-  //     }
-  // })
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=${API_KEY}`;
 
@@ -36,6 +27,47 @@ app.get("/api/weather", (req: Request, res: Response) => {
         res.status(e.response.status).send();
       }
     });
+});
+
+app.get("/api/location", (req: Request, res: Response) => {
+  const location = req.query.location;
+
+  if (!location) return;
+
+  const GEO_LOCATE_URL = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=5&appid=${API_KEY}`;
+
+  console.log({ isnan: isNaN(+location), location })
+
+  if (isNaN(+location)) {
+    axios
+    .get(GEO_LOCATE_URL)
+    .then((response) => {
+      if (response?.data) {
+        console.log({response})
+        res.json(response.data);
+      }
+    })
+    .catch((e) => {
+      if (e?.response?.status) {
+        res.status(e.response.status).send();
+      }
+    });
+  } else if (location.length === 5) {
+    const ZIP_LOCATE_URL = `http://api.openweathermap.org/geo/1.0/zip?zip=${location}&appid=${API_KEY}`
+    axios
+    .get(ZIP_LOCATE_URL)
+    .then((response) => {
+      if (response?.data) {
+        console.log({response})
+        res.json([response.data]);
+      }
+    })
+    .catch((e) => {
+      // if (e?.response?.status) {
+      //   res.status(e.response.status).send();
+      // }
+    });
+  }
 });
 
 app.listen(5001, () => {
