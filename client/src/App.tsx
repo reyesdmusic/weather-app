@@ -1,33 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { KeyboardEvent } from 'react';
+import Autocomplete from './components/Autocomplete';
 
 function App() {
   const [data, setData] = useState<any>({});
-  const [location, setLocation] = useState('');
-  const [error, setError] = useState<any>(null);
-
-  const searchLocation = (event: KeyboardEvent) => {
-    if (event.key === 'Enter') {
-      axios.get("/api/weather", { params: { location } }).then((response) => {
-        setData(response.data)
-      }).catch(e => {
-        setError({ hasError: true, status: e?.response?.status })
-      })
-      setLocation('')
-    }
-  }
 
   return (
     <div className="app">
-      <div>HELLO</div>
       <div className="search">
-        <input
-          value={location}
-          onChange={event => setLocation(event.target.value)}
-          onKeyPress={searchLocation}
-          placeholder='Enter Location'
-          type="text" />
+        <Autocomplete setData={setData} />
       </div>
       <div className="container">
         <div className="top">
