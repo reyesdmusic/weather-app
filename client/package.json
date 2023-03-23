@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "client",
   "version": "0.1.0",
   "proxy": "http://localhost:5001",
   "private": true,
