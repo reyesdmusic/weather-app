@@ -7,7 +7,7 @@ function App() {
   const [data, setData] = useState<any>({});
 
   return (
-    <div className="app">
+    <div className="p-24">
       <div className="search">
         <Autocomplete setData={setData} />
       </div>
