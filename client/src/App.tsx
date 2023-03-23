@@ -1,48 +1,67 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { KeyboardEvent } from 'react';
-import Autocomplete from './components/Autocomplete';
+import { useState } from "react";
+import Autocomplete from "./components/Autocomplete";
 
 function App() {
   const [data, setData] = useState<any>({});
+  const [error, setError] = useState<any>(null);
 
   return (
-    <div className="p-24">
-      <div className="search">
-        <Autocomplete setData={setData} />
-      </div>
-      <div className="container">
-        <div className="top">
-          <div className="location">
-            <p>{data.name}</p>
-          </div>
-          <div className="temp">
-            {data.main ? <h1>{data.main.temp.toFixed()}°F</h1> : null}
-          </div>
-          <div className="description">
-            {data.weather ? <p>{data.weather[0].main}</p> : null}
-          </div>
+    <div className="px-5 py-20 flex flex-col items-center text-gray-700 h-full">
+      <div className="w-full max-w-[500px] h-full">
+        <div>
+          <Autocomplete setData={setData} setError={setError} />
         </div>
-
-        {data.name !== undefined &&
-          <div className="bottom">
-            <div className="feels">
-              {data.main ? <p className='bold'>{data.main.feels_like.toFixed()}°F</p> : null}
-              <p>Feels Like</p>
+        {error ? (
+          <div>Sorry, couldn't find that location</div>
+        ) : (
+          <div className="h-full flex flex-col justify-between">
+            <div>
+              <div className="mt-[50px] text-[20px] font-medium">
+                {data.name}
+              </div>
+              <div>
+                {data.main ? (
+                  <h1 className="text-[80px] text-indigo-600 font-black leading-none">
+                    {data.main.temp.toFixed()}°F
+                  </h1>
+                ) : null}
+              </div>
+              <div>
+                {data.weather?.length ? (
+                  <p>{data.weather[0].description}</p>
+                ) : null}
+              </div>
             </div>
-            <div className="humidity">
-              {data.main ? <p className='bold'>{data.main.humidity}%</p> : null}
-              <p>Humidity</p>
-            </div>
-            <div className="wind">
-              {data.wind ? <p className='bold'>{data.wind.speed.toFixed()} MPH</p> : null}
-              <p>Wind Speed</p>
-            </div>
+            {data.name !== undefined && (
+              <div className="rounded-md bg-indigo-50 flex justify-between p-4 text-center">
+                {data.main ? (
+                  <div>
+                    Feels Like
+                    <div className="font-semibold">
+                      {data.main.feels_like.toFixed()}°F
+                    </div>
+                  </div>
+                ) : null}
+                {data.main ? (
+                  <div>
+                    Humidity
+                    <div className="font-semibold">{data.main.humidity}%</div>
+                  </div>
+                ) : null}
+                {data.wind ? (
+                  <div>
+                    Wind Speed
+                    <div className="font-semibold">
+                      {data.wind.speed.toFixed()} MPH
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+            )}
           </div>
-        }
+        )}
       </div>
     </div>
   );
 }
-
 export default App;
