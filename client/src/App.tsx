@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Autocomplete from "./components/Autocomplete";
+import Search from "./components/Search/Search";
 
 function App() {
   const [data, setData] = useState<any>({});
@@ -9,7 +9,7 @@ function App() {
     <div className="px-5 py-20 flex flex-col items-center text-gray-700 h-full">
       <div className="w-full max-w-[500px] h-full">
         <div>
-          <Autocomplete setData={setData} setError={setError} />
+          <Search setData={setData} setError={setError} />
         </div>
         {error ? (
           <div>Sorry, couldn't find that location</div>

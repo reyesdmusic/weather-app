@@ -9,11 +9,11 @@ const axios = require("axios");
 // 
 const API_KEY = "ff3af498ead27371a1dcb730a1c7e5a7";
 app.get("/api/weather", (req: Request, res: Response) => {
-  const location = req.query.location;
+  const { lat, lon } = req.query;
 
-  if (!location) return;
+  if (!lat || !lon) return;
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=${API_KEY}`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`
 
   axios
     .get(url)
@@ -36,14 +36,11 @@ app.get("/api/location", (req: Request, res: Response) => {
 
   const GEO_LOCATE_URL = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=5&appid=${API_KEY}`;
 
-  console.log({ isnan: isNaN(+location), location })
-
   if (isNaN(+location)) {
     axios
     .get(GEO_LOCATE_URL)
     .then((response) => {
       if (response?.data) {
-        console.log({response})
         res.json(response.data);
       }
     })
@@ -58,7 +55,6 @@ app.get("/api/location", (req: Request, res: Response) => {
     .get(ZIP_LOCATE_URL)
     .then((response) => {
       if (response?.data) {
-        console.log({response})
         res.json([response.data]);
       }
     })
