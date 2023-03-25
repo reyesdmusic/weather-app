@@ -77,16 +77,23 @@ function Search(props) {
     })
   }
 
-  function onSubmit(e) {
-    if (e.key === 'Enter' && !selectedLocationName && search) {
+  function onKeyUp(e) {
+    if (e.key === 'Enter') {
+      onSubmit()
+    }
+  }
+
+  function onSubmit() {
+    if (!selectedLocationName && search) {
       setSelectedLocationName(search)
     }
   }
 
   return (
+    <div className="search-form">
       <div 
         className="search-input-container"
-        onKeyUp={(e) => onSubmit(e)}
+        onKeyUp={(e) => onKeyUp(e)}
       >
         <label className={isFocused ? "label-focused" : ""}>Location</label>
         <Autocomplete
@@ -131,7 +138,12 @@ function Search(props) {
         <button className="location-icon-button" aria-label="geolocate" onClick={fetchGeolocation} >
           <CiLocationOn className="location-icon" />
         </button>
-        </div>
+        
+      </div>
+      <button className="search-icon-button" aria-label="geolocate" onClick={onSubmit} >
+          <CiSearch className="search-icon" />
+        </button>
+      </div>
   );
 }
 

@@ -1,5 +1,30 @@
+button {
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  background: none;
+  border: none;
+  padding: 0px;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: 2px solid var(--primary-light);
+  color: var(--primary-light);
+}
+
+label {
+  position: absolute;
+  top: 0;
+  color: var(--accent-dark);
+  pointer-events: none;
+  transform: translate(12px, 8px);
+  font-size: 14px;
+  font-weight: lighter;
+  transition: all 150ms ease-in-out;
+}
+
 input {
-  /* peer text-gray-700 placeholder-transparent */
   display: inline-block;
   width: calc(100% - 20px);
   border: 1px solid var(--accent-md);
@@ -32,17 +57,6 @@ input:placeholder-shown {
   position: relative;
 }
 
-label {
-  position: absolute;
-  top: 0;
-  color: var(--accent-dark);
-  pointer-events: none;
-  transform: translate(12px, 8px);
-  font-size: 14px;
-  font-weight: lighter;
-  transition: all 150ms ease-in-out;
-}
-
 .label-focused {
   transform: translate(12px, -8px);
   background-color: var(--background);
@@ -62,21 +76,6 @@ label {
   right: 10px;
 }
 
-button {
-  border-radius: 100%;
-  width: 20px;
-  height: 20px;
-  background: none;
-  border: none;
-  padding: 0px;
-  cursor: pointer;
-}
-
-button:focus {
-  outline: 2px solid var(--primary-light);
-  color: var(--primary-light);
-}
-
 .search-form {
   display: flex;
   justify-content: center;
@@ -87,4 +86,8 @@ button:focus {
 .search-icon {
   color: var(--primary);
   font-size: 20px;
+}
+
+.search-icon-button {
+  margin-left: 12px;
 }
