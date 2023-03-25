@@ -2,7 +2,8 @@ import { useState } from "react";
 import Search from "./components/Search/Search";
 import "./App.css";
 import ClipLoader from "react-spinners/ClipLoader";
-import { WiDayCloudy, WiStrongWind, WiThermometer, WiHumidity } from "react-icons/wi";
+import { WiDayCloudy } from "react-icons/wi";
+import Snapshot from "./components/Snapshot/Snapshot";
 
 function App() {
   const [data, setData] = useState<any>({});
@@ -41,35 +42,7 @@ function App() {
               
             </div>
           </div>
-          {data.name !== undefined && (
-            <div className="snapshot">
-              {data.main ? (
-                <div className="snapshot-item">
-                  <WiThermometer className="snapshot-icon" />
-                  <span>Feels like</span>
-                  <div className="snapshot-data">
-                    {data.main.feels_like.toFixed()}°F
-                  </div>
-                </div>
-              ) : null}
-              {data.main ? (
-                <div className="snapshot-item">
-                  <WiHumidity className="snapshot-icon" />
-                  <span>Humidity</span>
-                  <div className="snapshot-data">{data.main.humidity}%</div>
-                </div>
-              ) : null}
-              {data.wind ? (
-                <div className="snapshot-item">
-                  <WiStrongWind className="snapshot-icon" />
-                  <span>Wind Speed</span>
-                  <div className="snapshot-data">
-                    {data.wind.speed.toFixed()} <span className="mph">MPH</span>
-                  </div>
-                </div>
-              ) : null}
-            </div>
-          )}
+          <Snapshot data={data} />
         </div>
       )}
       {isLoading 
