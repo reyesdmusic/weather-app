@@ -29,6 +29,7 @@ function Search(props) {
 
   useEffect(() => {
     if (!locations[selectedLocationName] && !search) return;
+    props.setError(false);
 
     const lat = locations[selectedLocationName]?.lat;
     const lon = locations[selectedLocationName]?.lon;

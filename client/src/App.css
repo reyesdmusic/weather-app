@@ -25,35 +25,3 @@ body {
 .page * {
   max-width: 400px;
 }
-
-.weather-icon-container {
-  color: var(--accent-md);
-  font-size: 300px;
-  z-index: -1;
-  position: absolute;
-  top: 70px;
-}
-
-.weather-info {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  text-align: center;
-  align-items: center;
-}
-
-.location-name {
-  overflow: wrap;
-  font-size: 24px;
-  border-right: 1px solid var(--primary);
-  width: 50%;
-  padding-right: 12px;
-}
-
-.temperature {
-  font-size: 120px;
-  margin: 25px 0px;
-  color: var(--primary);
-  font-weight: 900;
-}

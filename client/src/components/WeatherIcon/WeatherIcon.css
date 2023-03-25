@@ -1,0 +1,7 @@
+.weather-icon-container {
+  color: var(--accent-md);
+  font-size: 300px;
+  z-index: -1;
+  position: absolute;
+  top: 70px;
+}

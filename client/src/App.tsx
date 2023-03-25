@@ -4,6 +4,7 @@ import "./App.css";
 import ClipLoader from "react-spinners/ClipLoader";
 import { WiDayCloudy } from "react-icons/wi";
 import Snapshot from "./components/Snapshot/Snapshot";
+import WeatherInfo from "./components/WeatherInfo/WeatherInfo";
 
 function App() {
   const [data, setData] = useState<any>({});
@@ -16,34 +17,10 @@ function App() {
       {error ? (
         <div>Sorry, couldn't find that location</div>
       ) : (
-        <div className="weather-info"> 
-          <div>
-            {data.main ? (
-                <h1 className="temperature">
-                  {data.main.temp.toFixed()}°F
-                </h1>
-              ) : null}
-            {data.weather?.length ? (
-              <div className="weather-icon-container">
-                <WiDayCloudy />
-              </div>
-            ) : null}
-            <div className="location-description-container">
-              {data.name ? (
-                <div className="location-name">
-                  {data.name}
-                </div>
-              ) : null}
-              {data?.weather && data?.weather[0]?.description ? (
-                <div className="description">
-                  {data.weather[0]?.description}
-                </div>
-              ) : null}
-              
-            </div>
-          </div>
+        <>
+          <WeatherInfo data={data} />
           <Snapshot data={data} />
-        </div>
+        </>
       )}
       {isLoading 
         ? <ClipLoader color="var(--primary)" cssOverride={ { position: "absolute", top: "calc(50vh - 50px)" } }/>
