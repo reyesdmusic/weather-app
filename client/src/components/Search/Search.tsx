@@ -3,7 +3,7 @@ import axios from "axios";
 import "./Search.css";
 import useDebounce from "../../shared/hooks/useDebounce";
 import Autocomplete from "react-autocomplete";
-import { CiLocationOn } from "react-icons/ci";
+import { CiLocationOn, CiSearch } from "react-icons/ci";
 
 function Search(props) {
   const [search, setSearch] = useState("");
@@ -28,18 +28,29 @@ function Search(props) {
   }, [debouncedSearch]);
 
   useEffect(() => {
-    if (!locations[selectedLocationName]) return;
+    if (!locations[selectedLocationName] && !search) return;
 
-    const { location } = locations[selectedLocationName];
+    const lat = locations[selectedLocationName]?.lat;
+    const lon = locations[selectedLocationName]?.lon;
 
-    if (location) {
-      axios.get("/api/weather", { params: { location } }).then((response) => {
-        setSearch("");
-        props.setData(response.data);
-      });
+    const params: any = {};
+
+    if (lat && lon) {
+      params.lat = lat;
+      params.lon = lon;
     } else {
-      props.setError(true);
+      params.location = search;
     }
+
+    axios.get("/api/weather", {params}).then((response) => {
+      setSearch("");
+      setSelectedLocationName("");
+      props.setData(response.data);
+    }).catch(() => {
+      props.setError(true);
+    });
+
+
   }, [selectedLocationName]);
 
   useEffect(() => {
@@ -48,10 +59,11 @@ function Search(props) {
     if (!latitude || !longitude) return;
 
     axios.get("/api/weather", { params: { lat: latitude, lon: longitude } }).then((response) => {
+      console.log({response})
       setSearch("");
       props.setData(response.data);
     }).catch(e => {
-      console.error(e);
+      console.log('error!')
       props.setError(true);
     });
   
@@ -65,51 +77,61 @@ function Search(props) {
     })
   }
 
+  function onSubmit(e) {
+    if (e.key === 'Enter' && !selectedLocationName && search) {
+      setSelectedLocationName(search)
+    }
+  }
+
   return (
-    <div className="search-input-container">
-      <label className={isFocused ? "label-focused" : ""}>Location</label>
-      <Autocomplete
-      id="search"
-      getItemValue={(item) => item.label}
-      items={locationOptions.map((location) => {
-        const city = `${location?.name ? location?.name : ""}`;
-        const state = `${location?.state ? `, ${location?.state}` : ""}`;
-        const country = location?.country || "";
+      <div 
+        className="search-input-container"
+        onKeyUp={(e) => onSubmit(e)}
+      >
+        <label className={isFocused ? "label-focused" : ""}>Location</label>
+        <Autocomplete
+          id="search"
+          getItemValue={(item) => item.label}
+          items={locationOptions.map((location) => {
 
-        const label = `${city}${state}`;
-        const queryParam = `${city},${state},${country}`;
+            if (!location) return;
 
-        locations[label] = { location: queryParam };
+            const { name, state, lat, lon } = location;
 
-        const item = { label };
+            const city = `${name || ""}`;
+            const stateName = `${state || ""}`;
 
-        return item;
-      })}
-      renderItem={(item, isHighlighted) => (
-        <option
-          key={item.label}
-          style={{ background: isHighlighted ? "var(--accent)" : "var(--background)", cursor: "pointer", padding: "6px" }}
-        >
-          {item.label}
-        </option>
-      )}
-      value={search}
-      onChange={(event) => {
-        console.log({event})
-        setSearch(event.target.value);
-      }}
-      onSelect={(val) => {
-        setSelectedLocationName(val);
-        setSearch(val);
-      }}
+            const label = `${city}, ${stateName}`;
 
-      inputProps={{ onFocus: () => setIsFocused(true), onBlur: () => search ? null : setIsFocused(false) }}
-      wrapperStyle={ { width: "100%" }}
-    />
-    <button className="icon-button" aria-label="geolocate" onClick={fetchGeolocation} >
-      <CiLocationOn className="icon" />
-    </button>
-    </div>
+            locations[label] = { lat, lon };
+
+            const item = { label };
+
+            return item;
+          })}
+          renderItem={(item, isHighlighted) => (
+            <option
+              key={`${item.label}-${Math.floor(Math.random() * Date.now())}`}
+              style={{ background: isHighlighted ? "var(--accent)" : "var(--background)", cursor: "pointer", padding: "6px" }}
+            >
+              {item.label}
+            </option>
+          )}
+          value={search}
+          onChange={(event) => {
+            setSearch(event.target.value);
+          }}
+          onSelect={(val) => {
+            setSelectedLocationName(val);
+            setSearch(val);
+          }}
+          inputProps={{ onFocus: () => setIsFocused(true), onBlur: () => search ? null : setIsFocused(false) }}
+          wrapperStyle={ { width: "100%" }}
+        />
+        <button className="location-icon-button" aria-label="geolocate" onClick={fetchGeolocation} >
+          <CiLocationOn className="location-icon" />
+        </button>
+        </div>
   );
 }
 

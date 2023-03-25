@@ -21,11 +21,17 @@ body {
   align-items: center;
 }
 
+.weather-icon-container {
+  color: var(--primary);
+  font-size: 300px;
+}
+
 .weather-info {
-  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  text-align: center;
 }
 
 .location-name {

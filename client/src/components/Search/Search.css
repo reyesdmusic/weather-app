@@ -51,25 +51,40 @@ label {
   padding: 0px 2px;
 }
 
-.icon {
+.location-icon {
   color: var(--primary);
   font-size: 20px;
 }
 
-.icon-button {
+.location-icon-button {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+}
+
+button {
   border-radius: 100%;
   width: 20px;
   height: 20px;
   background: none;
   border: none;
   padding: 0px;
-  position: absolute;
-  top: 6px;
-  right: 10px;
   cursor: pointer;
 }
 
-.icon-button:focus {
+button:focus {
   outline: 2px solid var(--primary-light);
   color: var(--primary-light);
+}
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.search-icon {
+  color: var(--primary);
+  font-size: 20px;
 }

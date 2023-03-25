@@ -2,6 +2,7 @@ import { useState } from "react";
 import Search from "./components/Search/Search";
 import "./App.css";
 import ClipLoader from "react-spinners/ClipLoader";
+import { WiDayCloudy } from "react-icons/wi";
 
 function App() {
   const [data, setData] = useState<any>({});
@@ -16,21 +17,22 @@ function App() {
       ) : (
         <div className="weather-info">
           <div>
-            <div className="location-name">
-              {data.name}
-            </div>
-            <div>
-              {data.main ? (
+            
+            {data.main ? (
                 <h1 className="temperature">
                   {data.main.temp.toFixed()}°F
                 </h1>
               ) : null}
-            </div>
-            <div>
-              {data.weather?.length ? (
-                <p>{data.weather[0].description}</p>
-              ) : null}
-            </div>
+            {data.weather?.length ? (
+              <div className="weather-icon-container">
+                <WiDayCloudy />
+              </div>
+            ) : null}
+            {data.name ? (
+              <div className="location-name">
+                {data.name}
+              </div>
+            ) : null}
           </div>
           {data.name !== undefined && (
             <div className="snapshot">
