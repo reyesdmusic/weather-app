@@ -4,16 +4,18 @@ const axios = require("axios");
 
 // const OPEN_WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather?q=miami&appid=ff3af498ead27371a1dcb730a1c7e5a7';
 
-// const GEO_LOCATE_URL = 'http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}'
+'https://api.openweathermap.org/data/2.5/weather?q=Miami,FL,US&appid=ff3af498ead27371a1dcb730a1c7e5a7';
+
+// const GEO_LOCATE_URL = 'http://api.openweathermap.org/geo/1.0/direct?q=Miami,FL,US&appid=ff3af498ead27371a1dcb730a1c7e5a7'
 
 // 
 const API_KEY = "ff3af498ead27371a1dcb730a1c7e5a7";
 app.get("/api/weather", (req: Request, res: Response) => {
-  const { lat, lon } = req.query;
+  const location = req.query.location;
 
-  if (!lat || !lon) return;
+  if (!location) return;
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=${API_KEY}`;
 
   axios
     .get(url)

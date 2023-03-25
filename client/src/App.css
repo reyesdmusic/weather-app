@@ -1,1 +1,20 @@
+:root {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 18px;
+  --primary: rgb(76, 24, 197);
+  --primary-light: rgb(162, 122, 255);
+  --accent: rgb(243, 243, 243);
+  --accent-md: rgb(207, 207, 207);
+}
 
+body {
+  margin: 12px;
+}
+
+.page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
