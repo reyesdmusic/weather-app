@@ -9,6 +9,7 @@ function Search(props) {
   const [search, setSearch] = useState("");
   const [locationOptions, setLocationOptions] = useState<any[]>([]);
   const [selectedLocationName, setSelectedLocationName] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
   const locations = {};
 
   const debouncedSearch = useDebounce(search, 300);
@@ -42,6 +43,7 @@ function Search(props) {
 
   return (
     <div className="search-input-container">
+      <label className={isFocused ? "label-focused" : ""}>Location</label>
       <Autocomplete
       id="search"
       getItemValue={(item) => item.label}
@@ -77,9 +79,9 @@ function Search(props) {
         setSearch(val);
       }}
 
+      inputProps={{ onFocus: () => setIsFocused(true), onBlur: () => setIsFocused(false) }}
       wrapperStyle={ { width: "100%" }}
     />
-    <label htmlFor="search">Location</label>
     <button></button>
     </div>
   );

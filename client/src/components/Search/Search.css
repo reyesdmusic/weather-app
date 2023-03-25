@@ -20,7 +20,32 @@ input:focus {
   outline: 2px solid var(--primary-light);
 }
 
+input:placeholder-shown {
+  background-color: ivory;
+  border: 2px solid darkorange;
+  border-radius: 5px;
+}
+
 .search-input-container {
   width: 100%;
   max-width: 400px;
+}
+
+label {
+  position: absolute;
+  top: 0;
+  color: var(--accent-dark);
+  pointer-events: none;
+  transform: translate(10px, 20px);
+  font-size: 14px;
+  font-weight: lighter;
+  transition: all 150ms ease-in-out;
+}
+
+.label-focused {
+  transform: translate(10px, 3px);
+  background-color: white;
+  color: var(--primary-light);
+  font-size: 12px;
+  padding: 0px 4px;
 }
