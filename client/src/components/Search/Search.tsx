@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { KeyboardEvent } from "react";
 import "./Search.css";
 import useDebounce from "../../shared/hooks/useDebounce";
 import Autocomplete from "react-autocomplete";
+import { CiLocationOn } from "react-icons/ci";
 
 function Search(props) {
   const [search, setSearch] = useState("");
@@ -62,13 +62,12 @@ function Search(props) {
         return item;
       })}
       renderItem={(item, isHighlighted) => (
-        <div
-
+        <option
           key={item.label}
-          style={{ background: isHighlighted ? "var(--accent)" : "white", cursor: "pointer", padding: "6px" }}
+          style={{ background: isHighlighted ? "var(--accent)" : "var(--background)", cursor: "pointer", padding: "6px" }}
         >
           {item.label}
-        </div>
+        </option>
       )}
       value={search}
       onChange={(event) => {
@@ -79,10 +78,12 @@ function Search(props) {
         setSearch(val);
       }}
 
-      inputProps={{ onFocus: () => setIsFocused(true), onBlur: () => setIsFocused(false) }}
+      inputProps={{ onFocus: () => setIsFocused(true), onBlur: () => search ? null : setIsFocused(false) }}
       wrapperStyle={ { width: "100%" }}
     />
-    <button></button>
+    <button className="icon-button" aria-label="geolocate">
+      <CiLocationOn className="icon" />
+    </button>
     </div>
   );
 }
