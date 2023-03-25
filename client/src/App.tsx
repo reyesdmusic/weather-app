@@ -1,25 +1,27 @@
 import { useState } from "react";
 import Search from "./components/Search/Search";
 import "./App.css";
+import ClipLoader from "react-spinners/ClipLoader";
 
 function App() {
   const [data, setData] = useState<any>({});
   const [error, setError] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   return (
     <div className="page">
-      <Search setData={setData} setError={setError} />
+      <Search setData={setData} setError={setError} setIsLoading={setIsLoading} />
       {error ? (
         <div>Sorry, couldn't find that location</div>
       ) : (
-        <div className="h-full flex flex-col justify-between">
+        <div className="weather-info">
           <div>
-            <div className="mt-[50px] text-[20px] font-medium">
+            <div className="location-name">
               {data.name}
             </div>
             <div>
               {data.main ? (
-                <h1 className="text-[80px] text-indigo-600 font-black leading-none">
+                <h1 className="temperature">
                   {data.main.temp.toFixed()}°F
                 </h1>
               ) : null}
@@ -31,7 +33,7 @@ function App() {
             </div>
           </div>
           {data.name !== undefined && (
-            <div className="rounded-md bg-indigo-50 flex justify-between p-4 text-center">
+            <div className="snapshot">
               {data.main ? (
                 <div>
                   Feels Like
@@ -58,6 +60,10 @@ function App() {
           )}
         </div>
       )}
+      {isLoading 
+        ? <ClipLoader color="var(--primary)" cssOverride={ { position: "absolute", top: "calc(50vh - 50px)" } }/>
+        : null
+      }
     </div>
   );
 }

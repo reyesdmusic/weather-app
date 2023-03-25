@@ -20,3 +20,31 @@ body {
   flex-direction: column;
   align-items: center;
 }
+
+.weather-info {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.location-name {
+  margin-top: 50px;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.temperature {
+  font-size: 80px;
+  color: var(--primary);
+  font-weight: 900;
+}
+
+.snapshot {
+  border-radius: 18px;
+  background-color: var(--primary-light);
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  text-align: center;
+}

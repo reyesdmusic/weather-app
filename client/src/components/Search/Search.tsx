@@ -49,8 +49,6 @@ function Search(props) {
 
     axios.get("/api/weather", { params: { lat: latitude, lon: longitude } }).then((response) => {
       setSearch("");
-
-      console.log(response.data)
       props.setData(response.data);
     }).catch(e => {
       console.error(e);
@@ -60,7 +58,9 @@ function Search(props) {
   }, [geoLocation]);
 
   function fetchGeolocation() {
+    props.setIsLoading(true);
     navigator.geolocation.getCurrentPosition(position => {
+      props.setIsLoading(false);
       setGeoLocation(position?.coords);
     })
   }
@@ -95,6 +95,7 @@ function Search(props) {
       )}
       value={search}
       onChange={(event) => {
+        console.log({event})
         setSearch(event.target.value);
       }}
       onSelect={(val) => {
