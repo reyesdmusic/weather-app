@@ -54,6 +54,7 @@ input:placeholder-shown {
 .search-input-container {
   width: 100%;
   max-width: 400px;
+  height: 40px;
   position: relative;
 }
 
@@ -90,4 +91,5 @@ input:placeholder-shown {
 
 .search-icon-button {
   margin-left: 12px;
+  transform: translateY(-5px);
 }

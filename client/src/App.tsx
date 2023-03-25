@@ -2,7 +2,7 @@ import { useState } from "react";
 import Search from "./components/Search/Search";
 import "./App.css";
 import ClipLoader from "react-spinners/ClipLoader";
-import { WiDayCloudy } from "react-icons/wi";
+import { WiDayCloudy, WiStrongWind, WiThermometer, WiHumidity } from "react-icons/wi";
 
 function App() {
   const [data, setData] = useState<any>({});
@@ -15,9 +15,8 @@ function App() {
       {error ? (
         <div>Sorry, couldn't find that location</div>
       ) : (
-        <div className="weather-info">
+        <div className="weather-info"> 
           <div>
-            
             {data.main ? (
                 <h1 className="temperature">
                   {data.main.temp.toFixed()}°F
@@ -28,33 +27,44 @@ function App() {
                 <WiDayCloudy />
               </div>
             ) : null}
-            {data.name ? (
-              <div className="location-name">
-                {data.name}
-              </div>
-            ) : null}
+            <div className="location-description-container">
+              {data.name ? (
+                <div className="location-name">
+                  {data.name}
+                </div>
+              ) : null}
+              {data?.weather && data?.weather[0]?.description ? (
+                <div className="description">
+                  {data.weather[0]?.description}
+                </div>
+              ) : null}
+              
+            </div>
           </div>
           {data.name !== undefined && (
             <div className="snapshot">
               {data.main ? (
-                <div>
-                  Feels Like
-                  <div>
+                <div className="snapshot-item">
+                  <WiThermometer className="snapshot-icon" />
+                  <span>Feels like</span>
+                  <div className="snapshot-data">
                     {data.main.feels_like.toFixed()}°F
                   </div>
                 </div>
               ) : null}
               {data.main ? (
-                <div>
-                  Humidity
-                  <div>{data.main.humidity}%</div>
+                <div className="snapshot-item">
+                  <WiHumidity className="snapshot-icon" />
+                  <span>Humidity</span>
+                  <div className="snapshot-data">{data.main.humidity}%</div>
                 </div>
               ) : null}
               {data.wind ? (
-                <div>
-                  Wind Speed
-                  <div>
-                    {data.wind.speed.toFixed()} MPH
+                <div className="snapshot-item">
+                  <WiStrongWind className="snapshot-icon" />
+                  <span>Wind Speed</span>
+                  <div className="snapshot-data">
+                    {data.wind.speed.toFixed()} <span className="mph">MPH</span>
                   </div>
                 </div>
               ) : null}
