@@ -10,6 +10,7 @@ function Search(props) {
   const [locationOptions, setLocationOptions] = useState<any[]>([]);
   const [selectedLocationName, setSelectedLocationName] = useState("");
   const [isFocused, setIsFocused] = useState(false);
+  const [geoLocation, setGeoLocation] = useState<any>({});
   const locations = {};
 
   const debouncedSearch = useDebounce(search, 300);
@@ -40,6 +41,29 @@ function Search(props) {
       props.setError(true);
     }
   }, [selectedLocationName]);
+
+  useEffect(() => {
+    const { latitude, longitude } = geoLocation;
+
+    if (!latitude || !longitude) return;
+
+    axios.get("/api/weather", { params: { lat: latitude, lon: longitude } }).then((response) => {
+      setSearch("");
+
+      console.log(response.data)
+      props.setData(response.data);
+    }).catch(e => {
+      console.error(e);
+      props.setError(true);
+    });
+  
+  }, [geoLocation]);
+
+  function fetchGeolocation() {
+    navigator.geolocation.getCurrentPosition(position => {
+      setGeoLocation(position?.coords);
+    })
+  }
 
   return (
     <div className="search-input-container">
@@ -81,7 +105,7 @@ function Search(props) {
       inputProps={{ onFocus: () => setIsFocused(true), onBlur: () => search ? null : setIsFocused(false) }}
       wrapperStyle={ { width: "100%" }}
     />
-    <button className="icon-button" aria-label="geolocate">
+    <button className="icon-button" aria-label="geolocate" onClick={fetchGeolocation} >
       <CiLocationOn className="icon" />
     </button>
     </div>
