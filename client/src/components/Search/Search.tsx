@@ -49,6 +49,16 @@ function Search(props) {
       props.setData(response.data);
     }).catch(() => {
       props.setError(true);
+      setSearch("");
+      setSelectedLocationName("");
+    });
+
+    axios.get("/api/forecast", {params}).then((response) => {
+      console.log(response)
+    }).catch(() => {
+      props.setError(true);
+      // setSearch("");
+      // setSelectedLocationName("");
     });
 
 
