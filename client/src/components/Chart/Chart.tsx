@@ -84,7 +84,7 @@ function CustomTooltip({ active, payload, label }) {
   if (active && payload) {
     return (
       <div className="tooltip">
-        <h4>{format(parseISO(label), "eeee, d MMM, yyyy")}</h4>
+        <h4>{format(parseISO(label), "eeee, MMM d | h:mm a")}</h4>
         <p>{payload[0].value.toFixed(2)}°F</p>
         <p>Humidity {payload[1].value}%</p>
       </div>

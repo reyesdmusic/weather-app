@@ -3,6 +3,7 @@ const app: Application = express();
 const axios = require("axios");
 
 const API_KEY = "ff3af498ead27371a1dcb730a1c7e5a7";
+
 app.get("/api/weather", (req: Request, res: Response) => {
   const { location, lat, lon } = req?.query;
 
