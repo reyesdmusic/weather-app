@@ -9,8 +9,8 @@ button {
 }
 
 button:focus {
-  outline: 2px solid var(--primary-light);
-  color: var(--primary-light);
+  outline: 2px solid var(--primary);
+  color: var(--primary);
 }
 
 label {
@@ -42,7 +42,7 @@ input + div {
 
 input:focus {
   border: none;
-  outline: 2px solid var(--primary-light);
+  outline: 2px solid var(--primary);
 }
 
 input:placeholder-shown {
@@ -61,7 +61,7 @@ input:placeholder-shown {
 .label-focused {
   transform: translate(12px, -8px);
   background-color: var(--background);
-  color: var(--primary-light);
+  color: var(--primary);
   font-size: 12px;
   padding: 0px 2px;
 }

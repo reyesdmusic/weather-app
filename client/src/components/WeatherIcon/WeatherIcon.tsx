@@ -6,8 +6,8 @@ function WeatherIcon({data}) {
   const [icon, setIcon] = useState(<WiDayCloudy />);
 
 const icons = {
-    "01d": <WiMoonAltFull />,
-    "01n": <WiDaySunny />,
+    "01d": <WiDaySunny/>,
+    "01n": <WiMoonAltFull  />,
     "02d": <WiCloudy />,
     "02n": <WiNightAltCloudy />,
     "03d": <WiDayCloudyHigh />,

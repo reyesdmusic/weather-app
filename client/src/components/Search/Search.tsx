@@ -55,6 +55,7 @@ function Search(props) {
 
     axios.get("/api/forecast", {params}).then((response) => {
       console.log(response)
+      props.setForecast(response.data)
     }).catch(() => {
       props.setError(true);
       // setSearch("");

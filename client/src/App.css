@@ -4,8 +4,10 @@
   font-size: 16px;
   --primary: rgb(76, 24, 197);
   --primary-light: rgb(162, 122, 255);
+  --secondary: rgb(231, 165, 0);
+  --secondary-light: rgb(255, 204, 0);
   --accent: rgb(243, 243, 243);
-  --accent-md: rgb(207, 207, 207);
+  --accent-md: rgb(230, 230, 230);
   --accent-dark: rgb(165, 165, 165);
   --accent-extra-dark: rgb(80, 80, 80);
   --background: white;
@@ -16,12 +18,7 @@ body {
 }
 
 .page {
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.page * {
-  max-width: 400px;
 }
