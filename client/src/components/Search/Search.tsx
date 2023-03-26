@@ -13,7 +13,7 @@ interface Location {
 
 // Type for locations HashTable used to store lat and lon values associated with a LocationOption
 interface Locations {
-  [key: string]: Location
+  [key: string]: Location;
 }
 
 function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
@@ -21,7 +21,9 @@ function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
   const [locationOptions, setLocationOptions] = useState<LocationOption[]>([]);
   const [selectedLocationName, setSelectedLocationName] = useState<string>("");
   const [isFocused, setIsFocused] = useState<boolean>(false);
-  const [geoLocation, setGeoLocation] = useState<GeolocationCoordinates | null>(null);
+  const [geoLocation, setGeoLocation] = useState<GeolocationCoordinates | null>(
+    null
+  );
   const locations: Locations | {} = {};
 
   const debouncedSearch = useDebounce(search, 300);
@@ -55,25 +57,29 @@ function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
       params.location = search;
     }
 
-    axios.get("/api/weather", {params}).then((response) => {
-      setSearch("");
-      setSelectedLocationName("");
-      const snapshot: Snapshot = response?.data;
-      setSnapshot(snapshot);
-    }).catch(() => {
-      setError(true);
-      setSearch("");
-      setSelectedLocationName("");
-    });
+    axios
+      .get("/api/weather", { params })
+      .then((response) => {
+        setSearch("");
+        setSelectedLocationName("");
+        const snapshot: Snapshot = response?.data;
+        setSnapshot(snapshot);
+      })
+      .catch(() => {
+        setError(true);
+        setSearch("");
+        setSelectedLocationName("");
+      });
 
-    axios.get("/api/forecast", {params}).then((response) => {
-      const forecast: Forecast = response?.data;
-      setForecast(forecast)
-    }).catch(() => {
-      setError(true);
-    });
-
-
+    axios
+      .get("/api/forecast", { params })
+      .then((response) => {
+        const forecast: Forecast = response?.data;
+        setForecast(forecast);
+      })
+      .catch(() => {
+        setError(true);
+      });
   }, [selectedLocationName]);
 
   useEffect(() => {
@@ -83,48 +89,44 @@ function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
 
     if (!latitude || !longitude) return;
 
-    axios.get("/api/weather", { params: { lat: latitude, lon: longitude } }).then((response) => {
-      setSearch("");
-      setSnapshot(response.data);
-    }).catch(() => {
-      setError(true);
-    });
-  
+    axios
+      .get("/api/weather", { params: { lat: latitude, lon: longitude } })
+      .then((response) => {
+        setSearch("");
+        setSnapshot(response.data);
+      })
+      .catch(() => {
+        setError(true);
+      });
   }, [geoLocation]);
 
   function fetchGeolocation() {
     setIsLoading(true);
-    navigator.geolocation.getCurrentPosition(position => {
+    navigator.geolocation.getCurrentPosition((position) => {
       setIsLoading(false);
       const geoLocation: GeolocationCoordinates = position?.coords;
       setGeoLocation(geoLocation);
-    })
+    });
   }
-
   function onKeyUp(e) {
-    if (e.key === 'Enter') {
-      onSubmit()
+    if (e.key === "Enter") {
+      onSubmit();
     }
   }
 
   function onSubmit() {
     if (!selectedLocationName && search) {
-      setSelectedLocationName(search)
+      setSelectedLocationName(search);
     }
   }
 
   return (
     <div className="search-form">
-      <div 
-        className="search-input-container"
-        onKeyUp={(e) => onKeyUp(e)}
-      >
+      <div className="search-input-container" onKeyUp={(e) => onKeyUp(e)}>
         <label className={isFocused ? "label-focused" : ""}>Location</label>
         <Autocomplete
-          id="search"
-          getItemValue={(item) => item.label}
+          getItemValue={(item) => item?.label}
           items={locationOptions.map((locationOption: LocationOption) => {
-
             if (!locationOption) return;
 
             const { name, state, lat, lon } = locationOption;
@@ -143,33 +145,43 @@ function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
             return item;
           })}
           renderItem={(item, isHighlighted) => (
-            <option
-              key={`${item.label}-${Math.floor(Math.random() * Date.now())}`}
-              style={{ background: isHighlighted ? "var(--accent)" : "var(--background)", cursor: "pointer", padding: "6px" }}
+            <div
+              key={`${item.label}-${item.latitude}-${item.longitude}`}
+              style={{
+                background: isHighlighted
+                  ? "var(--accent)"
+                  : "var(--background)",
+                cursor: "pointer",
+                padding: "6px",
+              }}
             >
               {item.label}
-            </option>
+            </div>
           )}
           value={search}
-          onChange={(event) => {
-            setSearch(event.target.value);
-          }}
+          onChange={(e) => setSearch(e.target.value)}
           onSelect={(val) => {
-            setSelectedLocationName(val);
             setSearch(val);
+            setSelectedLocationName(val);
           }}
-          inputProps={{ onFocus: () => setIsFocused(true), onBlur: () => search ? null : setIsFocused(false) }}
-          wrapperStyle={ { width: "100%" }}
+          inputProps={{
+            onFocus: () => setIsFocused(true),
+            onBlur: () => (search ? null : setIsFocused(false)),
+          }}
+          wrapperStyle={{ width: "100%" }}
         />
-        <button className="location-icon-button" aria-label="geolocate" onClick={fetchGeolocation} >
+        <button
+          className="location-icon-button"
+          aria-label="geolocate"
+          onClick={fetchGeolocation}
+        >
           <CiLocationOn className="location-icon" />
         </button>
-        
       </div>
-      <button className="search-icon-button" aria-label="geolocate" onClick={onSubmit} >
-          <CiSearch className="search-icon" />
-        </button>
-      </div>
+      <button className="search-icon-button" aria-label="geolocate">
+        <CiSearch className="search-icon" />
+      </button>
+    </div>
   );
 }
 
