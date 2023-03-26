@@ -46,7 +46,7 @@ function Search(props) {
     axios.get("/api/weather", {params}).then((response) => {
       setSearch("");
       setSelectedLocationName("");
-      props.setData(response.data);
+      props.setSnapshot(response.data);
     }).catch(() => {
       props.setError(true);
       setSearch("");
@@ -73,7 +73,7 @@ function Search(props) {
     axios.get("/api/weather", { params: { lat: latitude, lon: longitude } }).then((response) => {
       console.log({response})
       setSearch("");
-      props.setData(response.data);
+      props.setSnapshot(response.data);
     }).catch(e => {
       console.log('error!')
       props.setError(true);

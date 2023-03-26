@@ -7,21 +7,21 @@ import WeatherInfo from "./components/WeatherInfo/WeatherInfo";
 import Chart from './components/Chart/Chart';
 
 function App() {
-  const [data, setData] = useState<any>({});
+  const [snapshot, setSnapshot] = useState<any>({});
   const [forecast, setForecast] = useState<any>({});
   const [error, setError] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   return (
     <div className="page">
-      <Search setData={setData} setError={setError} setIsLoading={setIsLoading} setForecast={setForecast} />
+      <Search setSnapshot={setSnapshot} setError={setError} setIsLoading={setIsLoading} setForecast={setForecast} />
       {error ? (
         <div>Sorry, couldn't find that location</div>
       ) : (
         <>
-          <WeatherInfo data={data} />
-          <Snapshot data={data} />
-          <Chart data={forecast} />
+          <WeatherInfo snapshot={snapshot} />
+          <Snapshot snapshot={snapshot} />
+          <Chart forecast={forecast} />
         </>
       )}
       {isLoading 

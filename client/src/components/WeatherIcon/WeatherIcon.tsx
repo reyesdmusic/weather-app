@@ -2,7 +2,7 @@ import "./WeatherIcon.css";
 import { WiDayCloudy, WiMoonAltFull, WiDaySunny, WiCloudy, WiNightAltCloudy, WiNightAltThunderstorm, WiDayThunderstorm, WiDayShowers, WiDayRain, WiNightAltShowers, WiNightAltRain, WiDaySnowWind, WiNightAltSnowWind, WiDust, WiDayCloudyHigh, WiNightAltCloudyHigh } from "react-icons/wi";
 import { useEffect, useState } from "react";
 
-function WeatherIcon({data}) {
+function WeatherIcon({snapshot}) {
   const [icon, setIcon] = useState(<WiDayCloudy />);
 
 const icons = {
@@ -28,16 +28,16 @@ const icons = {
 
 
   useEffect(() => {
-    if (data.weather) {
-      const iconId = data.weather[0]?.icon;
+    if (snapshot.weather) {
+      const iconId = snapshot.weather[0]?.icon;
       setIcon(icons[iconId])
     }
-  }, [data]);
+  }, [snapshot]);
   
 
   return (
       <>
-        {data.weather?.length ? (
+        {snapshot.weather?.length ? (
           <div className="weather-icon-container">
             {icon}
           </div>

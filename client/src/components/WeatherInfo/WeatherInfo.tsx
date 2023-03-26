@@ -1,27 +1,26 @@
 import "./WeatherInfo.css";
 import WeatherIcon from "../WeatherIcon/WeatherIcon";
-import { WiDayCloudy } from "react-icons/wi";
 
-function WeatherInfo({data}) {
+function WeatherInfo({snapshot}) {
 
   return (
     <div className="weather-info"> 
       <div>
-        {data.main ? (
+        {snapshot.main ? (
             <h1 className="temperature">
-              {data.main.temp.toFixed()}°F
+              {snapshot.main.temp.toFixed()}°F
             </h1>
           ) : null}
-        <WeatherIcon data={data} />
+        <WeatherIcon snapshot={snapshot} />
         <div className="location-description-container">
-          {data.name ? (
+          {snapshot.name ? (
             <div className="location-name">
-              {data.name}
+              {snapshot.name}
             </div>
           ) : null}
-          {data?.weather && data?.weather[0]?.description ? (
+          {snapshot?.weather && snapshot?.weather[0]?.description ? (
             <div className="description">
-              {data.weather[0]?.description}
+              {snapshot.weather[0]?.description}
             </div>
           ) : null}   
         </div>

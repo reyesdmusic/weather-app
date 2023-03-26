@@ -10,10 +10,10 @@ import {
 } from "recharts";
 import { format, parseISO } from "date-fns";
 
-function Chart({ data }) {
-    if (!data?.list?.length) return null;
+function Chart({ forecast }) {
+    if (!forecast?.list?.length) return null;
 
-    const chartData = data?.list?.map(weather => {
+    const chartData = forecast?.list?.map(weather => {
         return { date: weather.dt_txt, temp: weather?.main?.temp, humidity: weather?.main?.humidity }
     });
     
