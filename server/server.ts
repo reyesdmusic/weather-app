@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from "express";
 const app: Application = express();
 const axios = require("axios");
+import { Forecast } from "../shared-types";
 
 const API_KEY = "ff3af498ead27371a1dcb730a1c7e5a7";
 
@@ -39,8 +40,9 @@ app.get("/api/forecast", (req: Request, res: Response) => {
   axios
     .get(url)
     .then((response) => {
-      if (response?.data) {
-        res.json(response.data);
+      const forecast: Forecast = response?.data;
+      if (forecast) {
+        res.json(forecast);
       }
     })
     .catch((e) => {
