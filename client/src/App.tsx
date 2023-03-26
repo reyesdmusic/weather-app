@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Search from "./components/Search/Search";
 import "./App.css";
+import Search from "./components/Search/Search";
 import ClipLoader from "react-spinners/ClipLoader";
 import SnapshotComponent from "./components/Snapshot/Snapshot";
 import WeatherInfo from "./components/WeatherInfo/WeatherInfo";
