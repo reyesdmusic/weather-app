@@ -4,7 +4,7 @@ import "./App.css";
 import ClipLoader from "react-spinners/ClipLoader";
 import Snapshot from "./components/Snapshot/Snapshot";
 import WeatherInfo from "./components/WeatherInfo/WeatherInfo";
-import Chart from './components/Chart/Chart';
+import Forecast from './components/Forecast/Forecast';
 
 function App() {
   const [snapshot, setSnapshot] = useState<any>({});
@@ -21,7 +21,7 @@ function App() {
         <>
           <WeatherInfo snapshot={snapshot} />
           <Snapshot snapshot={snapshot} />
-          <Chart forecast={forecast} />
+          <Forecast forecast={forecast} />
         </>
       )}
       {isLoading 

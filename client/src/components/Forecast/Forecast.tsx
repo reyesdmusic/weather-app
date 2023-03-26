@@ -1,4 +1,4 @@
-import "./Chart.css";
+import "./Forecast.css";
 import {
   AreaChart,
   XAxis,
@@ -10,7 +10,7 @@ import {
 } from "recharts";
 import { format, parseISO } from "date-fns";
 
-function Chart({ forecast }) {
+function Forecast({ forecast }) {
     if (!forecast?.list?.length) return null;
 
     const chartData = forecast?.list?.map(weather => {
@@ -93,4 +93,4 @@ function CustomTooltip({ active, payload, label }) {
   return null;
 }
 
-export default Chart;
+export default Forecast;
