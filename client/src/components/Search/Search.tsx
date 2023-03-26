@@ -5,7 +5,7 @@ import useDebounce from "../../shared/hooks/useDebounce";
 import Autocomplete from "react-autocomplete";
 import { CiLocationOn, CiSearch } from "react-icons/ci";
 
-function Search(props) {
+function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
   const [search, setSearch] = useState("");
   const [locationOptions, setLocationOptions] = useState<any[]>([]);
   const [selectedLocationName, setSelectedLocationName] = useState("");
@@ -29,7 +29,7 @@ function Search(props) {
 
   useEffect(() => {
     if (!locations[selectedLocationName] && !search) return;
-    props.setError(false);
+    setError(false);
 
     const lat = locations[selectedLocationName]?.lat;
     const lon = locations[selectedLocationName]?.lon;
@@ -46,18 +46,18 @@ function Search(props) {
     axios.get("/api/weather", {params}).then((response) => {
       setSearch("");
       setSelectedLocationName("");
-      props.setSnapshot(response.data);
+      setSnapshot(response.data);
     }).catch(() => {
-      props.setError(true);
+      setError(true);
       setSearch("");
       setSelectedLocationName("");
     });
 
     axios.get("/api/forecast", {params}).then((response) => {
       console.log(response)
-      props.setForecast(response.data)
+      setForecast(response.data)
     }).catch(() => {
-      props.setError(true);
+      setError(true);
       // setSearch("");
       // setSelectedLocationName("");
     });
@@ -73,18 +73,18 @@ function Search(props) {
     axios.get("/api/weather", { params: { lat: latitude, lon: longitude } }).then((response) => {
       console.log({response})
       setSearch("");
-      props.setSnapshot(response.data);
+      setSnapshot(response.data);
     }).catch(e => {
       console.log('error!')
-      props.setError(true);
+      setError(true);
     });
   
   }, [geoLocation]);
 
   function fetchGeolocation() {
-    props.setIsLoading(true);
+    setIsLoading(true);
     navigator.geolocation.getCurrentPosition(position => {
-      props.setIsLoading(false);
+      setIsLoading(false);
       setGeoLocation(position?.coords);
     })
   }
