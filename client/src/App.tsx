@@ -2,15 +2,15 @@ import { useState } from "react";
 import Search from "./components/Search/Search";
 import "./App.css";
 import ClipLoader from "react-spinners/ClipLoader";
-import Snapshot from "./components/Snapshot/Snapshot";
+import SnapshotComponent from "./components/Snapshot/Snapshot";
 import WeatherInfo from "./components/WeatherInfo/WeatherInfo";
 import ForecastComponent from './components/Forecast/Forecast';
-import { Forecast } from "../../shared-types";
+import { Forecast, Snapshot } from "../../shared-types";
 
 function App() {
-  const [snapshot, setSnapshot] = useState<any>({});
+  const [snapshot, setSnapshot] = useState<Snapshot | {}>({});
   const [forecast, setForecast] = useState<Forecast | {}>({});
-  const [error, setError] = useState<any>(null);
+  const [error, setError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   return (
@@ -21,7 +21,7 @@ function App() {
       ) : (
         <>
           <WeatherInfo snapshot={snapshot} />
-          <Snapshot snapshot={snapshot} />
+          <SnapshotComponent snapshot={snapshot} />
           <ForecastComponent forecast={forecast} />
         </>
       )}

@@ -1,9 +1,9 @@
-export type Forecast = {
+export interface Forecast {
   dt_txt: string;
   main: WeatherDetail;
 };
 
-type WeatherDetail = {
+interface WeatherDetail {
   temp: string;
   humidity: string;
 };

@@ -4,13 +4,14 @@ import "./Search.css";
 import useDebounce from "../../shared/hooks/useDebounce";
 import Autocomplete from "react-autocomplete";
 import { CiLocationOn, CiSearch } from "react-icons/ci";
+import { Forecast, Snapshot } from "../../../../shared-types";
 
 function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
   const [search, setSearch] = useState("");
   const [locationOptions, setLocationOptions] = useState<any[]>([]);
   const [selectedLocationName, setSelectedLocationName] = useState("");
   const [isFocused, setIsFocused] = useState(false);
-  const [geoLocation, setGeoLocation] = useState<any>({});
+  const [geoLocation, setGeoLocation] = useState<GeolocationCoordinates | null>(null);
   const locations = {};
 
   const debouncedSearch = useDebounce(search, 300);
@@ -46,7 +47,8 @@ function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
     axios.get("/api/weather", {params}).then((response) => {
       setSearch("");
       setSelectedLocationName("");
-      setSnapshot(response.data);
+      const snapshot: Snapshot = response?.data;
+      setSnapshot(snapshot);
     }).catch(() => {
       setError(true);
       setSearch("");
@@ -54,28 +56,26 @@ function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
     });
 
     axios.get("/api/forecast", {params}).then((response) => {
-      console.log(response)
-      setForecast(response.data)
+      const forecast: Forecast = response?.data;
+      setForecast(forecast)
     }).catch(() => {
       setError(true);
-      // setSearch("");
-      // setSelectedLocationName("");
     });
 
 
   }, [selectedLocationName]);
 
   useEffect(() => {
+    if (!geoLocation) return;
+    
     const { latitude, longitude } = geoLocation;
 
     if (!latitude || !longitude) return;
 
     axios.get("/api/weather", { params: { lat: latitude, lon: longitude } }).then((response) => {
-      console.log({response})
       setSearch("");
       setSnapshot(response.data);
-    }).catch(e => {
-      console.log('error!')
+    }).catch(() => {
       setError(true);
     });
   
@@ -85,7 +85,8 @@ function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
     setIsLoading(true);
     navigator.geolocation.getCurrentPosition(position => {
       setIsLoading(false);
-      setGeoLocation(position?.coords);
+      const geoLocation: GeolocationCoordinates = position?.coords;
+      setGeoLocation(geoLocation);
     })
   }
 
