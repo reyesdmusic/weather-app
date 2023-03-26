@@ -1,7 +1,7 @@
 import express, { Application, Request, Response } from "express";
 const app: Application = express();
 const axios = require("axios");
-import { Forecast, Snapshot } from "../shared-types";
+import { Forecast, Snapshot, LocationOption } from "../shared-types";
 
 const API_KEY = "ff3af498ead27371a1dcb730a1c7e5a7";
 
@@ -63,8 +63,9 @@ app.get("/api/location", (req: Request, res: Response) => {
   axios
   .get(GEO_LOCATE_URL)
   .then((response) => {
-    if (response?.data) {
-      res.json(response.data);
+    const locationOptions: LocationOption[] = response.data; 
+    if (locationOptions) {
+      res.json(locationOptions);
     }
   })
   .catch((e) => {

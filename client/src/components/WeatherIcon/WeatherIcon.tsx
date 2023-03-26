@@ -1,11 +1,15 @@
 import "./WeatherIcon.css";
 import { WiDayCloudy, WiMoonAltFull, WiDaySunny, WiCloudy, WiNightAltCloudy, WiNightAltThunderstorm, WiDayThunderstorm, WiDayShowers, WiDayRain, WiNightAltShowers, WiNightAltRain, WiDaySnowWind, WiNightAltSnowWind, WiDust, WiDayCloudyHigh, WiNightAltCloudyHigh } from "react-icons/wi";
-import { useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 
-function WeatherIcon({snapshot}) {
+function WeatherIcon({ snapshot }) {
   const [icon, setIcon] = useState(<WiDayCloudy />);
 
-const icons = {
+interface Icons {
+  [key: string]: ReactElement;
+}
+
+const icons: Icons = {
     "01d": <WiDaySunny/>,
     "01n": <WiMoonAltFull  />,
     "02d": <WiCloudy />,

@@ -1,18 +1,28 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Search.css";
-import useDebounce from "../../shared/hooks/useDebounce";
+import useDebounce from "../../hooks/useDebounce";
 import Autocomplete from "react-autocomplete";
 import { CiLocationOn, CiSearch } from "react-icons/ci";
-import { Forecast, Snapshot } from "../../../../shared-types";
+import { Forecast, Snapshot, LocationOption } from "../../../../shared-types";
+
+interface Location {
+  lat: string;
+  lon: string;
+}
+
+// Type for locations HashTable used to store lat and lon values associated with a LocationOption
+interface Locations {
+  [key: string]: Location
+}
 
 function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
-  const [search, setSearch] = useState("");
-  const [locationOptions, setLocationOptions] = useState<any[]>([]);
-  const [selectedLocationName, setSelectedLocationName] = useState("");
-  const [isFocused, setIsFocused] = useState(false);
+  const [search, setSearch] = useState<string>("");
+  const [locationOptions, setLocationOptions] = useState<LocationOption[]>([]);
+  const [selectedLocationName, setSelectedLocationName] = useState<string>("");
+  const [isFocused, setIsFocused] = useState<boolean>(false);
   const [geoLocation, setGeoLocation] = useState<GeolocationCoordinates | null>(null);
-  const locations = {};
+  const locations: Locations | {} = {};
 
   const debouncedSearch = useDebounce(search, 300);
   useEffect(() => {
@@ -20,7 +30,8 @@ function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
       await axios
         .get("/api/location", { params: { location: search } })
         .then((response) => {
-          setLocationOptions(response.data);
+          const locations: LocationOption[] = response?.data;
+          setLocationOptions(locations);
         });
     }
 
@@ -67,7 +78,7 @@ function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
 
   useEffect(() => {
     if (!geoLocation) return;
-    
+
     const { latitude, longitude } = geoLocation;
 
     if (!latitude || !longitude) return;
@@ -112,18 +123,20 @@ function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
         <Autocomplete
           id="search"
           getItemValue={(item) => item.label}
-          items={locationOptions.map((location) => {
+          items={locationOptions.map((locationOption: LocationOption) => {
 
-            if (!location) return;
+            if (!locationOption) return;
 
-            const { name, state, lat, lon } = location;
+            const { name, state, lat, lon } = locationOption;
 
             const city = `${name || ""}`;
             const stateName = `${state || ""}`;
 
             const label = `${city}, ${stateName}`;
 
-            locations[label] = { lat, lon };
+            const location: Location = { lat, lon };
+
+            locations[label] = location;
 
             const item = { label };
 
