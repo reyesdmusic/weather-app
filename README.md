@@ -36,18 +36,22 @@ Semantic HTML and appropriate header elements were used, descriptive aria-labels
 
 ### Third Party API
 
-Weather data is fetched from [OpenWeatherMap](https://openweathermap.org/api)
+Location and Weather data is fetched from [OpenWeatherMap](https://openweathermap.org/api)
 
 - Currently utilzing the weather, four-day forecast, and location APIs
-
-### Geolocation
-
-[Geolocation.getCurrentPosition](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition) used for geolocation
 
 ### Error Handling
 
 - The handleError utils in the client and server are placeholders for more robust implementations of error logging and monitoring
 
-### Search
+### Search Component
 
-- Supports search by zip or location name
+Supports search by location or zip. Utilizes [react-autocomplete](https://www.npmjs.com/package/react-autocomplete) for autocomplete. On keydown, a debounced fetch is made to the locations api to populate the location options in the dropdown. When user selects an option or submits, that location gets sent to the weather and forecast endpoints.
+
+### Geolocation
+
+[Geolocation.getCurrentPosition](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition) used for geolocation
+
+### Forecast Component
+
+The forecast component utilizes [recharts](https://recharts.org/en-US/) to generate the data in a chart - displaying humidity and temparature data. Other data points can be added down the road.
