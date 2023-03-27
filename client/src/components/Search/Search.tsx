@@ -125,7 +125,7 @@ function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
       setError(false);
       const geoLocation: GeolocationCoordinates = position?.coords;
       setGeoLocation(geoLocation);
-    });
+    }, handleError);
   }
   function onKeyUp(e) {
     if (e.key === "Enter") {

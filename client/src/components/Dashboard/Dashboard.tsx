@@ -1,7 +1,6 @@
 import Forecast from "../Forecast/Forecast";
 import Snapshot from "../Snapshot/Snapshot";
 import WeatherInfo from "../WeatherInfo/WeatherInfo";
-import "./Dashboard.css";
 
 function Dashboard({ error, snapshot, forecast }) {
   if (error) return null;

@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from "express";
 const app: Application = express();
 const axios = require("axios");
 import { Forecast, Snapshot, LocationOption } from "../shared-types";
+import handleError from "./utils/handleError";
 
 const API_KEY = "ff3af498ead27371a1dcb730a1c7e5a7";
 
@@ -25,6 +26,7 @@ app.get("/api/weather", (req: Request, res: Response) => {
     .catch((e) => {
       if (e?.response?.status) {
         res.status(e.response.status).send();
+        handleError(e);
       }
     });
 });
@@ -49,6 +51,7 @@ app.get("/api/forecast", (req: Request, res: Response) => {
     .catch((e) => {
       if (e?.response?.status) {
         res.status(e.response.status).send();
+        handleError(e);
       }
     });
 });
@@ -71,6 +74,7 @@ app.get("/api/location", (req: Request, res: Response) => {
   .catch((e) => {
     if (e?.response?.status) {
       res.status(e.response.status).send();
+      handleError(e);
     }
   });
 });
