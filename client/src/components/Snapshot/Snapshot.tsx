@@ -4,9 +4,7 @@ import { WiStrongWind, WiThermometer, WiHumidity } from "react-icons/wi";
 
 function Snapshot({ snapshot }) {
   return (
-    <>
-      {(
-        <article> 
+    <article> 
           {snapshot.name !== undefined && (
             <div className="snapshot">
               {snapshot.main ? (
@@ -37,8 +35,6 @@ function Snapshot({ snapshot }) {
             </div>
           )}
         </article>
-      )}
-    </>
   );
 }
 export default Snapshot;

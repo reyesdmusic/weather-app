@@ -104,6 +104,7 @@ function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
     setIsLoading(true);
     navigator.geolocation.getCurrentPosition((position) => {
       setIsLoading(false);
+      setError(false);
       const geoLocation: GeolocationCoordinates = position?.coords;
       setGeoLocation(geoLocation);
     });

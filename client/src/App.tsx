@@ -1,10 +1,10 @@
 import { useState } from "react";
 import "./App.css";
 import Search from "./components/Search/Search";
-import ClipLoader from "react-spinners/ClipLoader";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import { Forecast, Snapshot } from "../../shared-types";
 import Dashboard from "./components/Dashboard/Dashboard";
+import Spinner from "./components/Spinner/Spinner";
 
 function App() {
   const [snapshot, setSnapshot] = useState<Snapshot | {}>({});
@@ -17,10 +17,7 @@ function App() {
       <Search setSnapshot={setSnapshot} setError={setError} setIsLoading={setIsLoading} setForecast={setForecast} />
       <Dashboard error={error} snapshot={snapshot} forecast={forecast} />
       <ErrorMessage error={error} />
-      {isLoading 
-        ? <ClipLoader color="var(--primary)" cssOverride={ { position: "absolute", top: "calc(50vh - 50px)" } }/>
-        : null
-      }
+      <Spinner isLoading={isLoading} />
     </div>
   );
 }
