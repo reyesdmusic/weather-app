@@ -4,7 +4,7 @@
   "description": "Weather App",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cd client && npm run test",
     "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm run start\""
   },
   "repository": {

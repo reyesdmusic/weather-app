@@ -6,19 +6,17 @@
   --primary-light: rgb(162, 122, 255);
   --secondary: rgb(231, 165, 0);
   --secondary-light: rgb(255, 204, 0);
-  --accent: rgb(243, 243, 243);
-  --accent-md: rgb(230, 230, 230);
-  --accent-dark: rgb(165, 165, 165);
+  --accent: rgb(215, 215, 215);
+  --accent-light: rgb(234, 234, 234);
+  --accent-md: rgb(132, 132, 132);
+  --accent-dark: rgb(111, 111, 111);
   --accent-extra-dark: rgb(80, 80, 80);
   --background: white;
-}
-
-body {
-  margin: 12px;
 }
 
 .page {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 12px;
 }

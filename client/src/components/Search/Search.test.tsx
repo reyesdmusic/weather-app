@@ -4,12 +4,10 @@
 import { render, screen } from "@testing-library/react";
 import Search from "./Search";
 
-test("message is shown when in error state", () => {
+test("search input should be shown", () => {
   const { container } = render(
     <Search setError={{}} setIsLoading={{}} setSnapshot={{}} setForecast={{}} />
   );
   const input = container.querySelector("input");
-  console.log(input);
-
   expect(input).toBeTruthy();
 });

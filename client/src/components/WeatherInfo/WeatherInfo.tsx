@@ -1,29 +1,26 @@
 import "./WeatherInfo.css";
 import WeatherIcon from "../WeatherIcon/WeatherIcon";
 
-function WeatherInfo({snapshot}) {
-
+function WeatherInfo({ snapshot }) {
   return (
-    <article className="weather-info"> 
+    <article className="weather-info">
       <div>
         {snapshot.main ? (
-            <h1 className="temperature">
-              {snapshot.main.temp.toFixed()}°F
-            </h1>
-          ) : null}
+          <h1 id="temp" className="temperature">
+            {snapshot.main.temp.toFixed()}°F
+          </h1>
+        ) : null}
         <WeatherIcon snapshot={snapshot} />
-        <div className="location-description-container">
+        <h2 className="location-description-container">
           {snapshot.name ? (
-            <div className="location-name">
-              {snapshot.name}
-            </div>
+            <span className="location-name">{snapshot.name}</span>
           ) : null}
           {snapshot?.weather && snapshot?.weather[0]?.description ? (
-            <div className="description">
+            <span className="description">
               {snapshot.weather[0]?.description}
-            </div>
-          ) : null}   
-        </div>
+            </span>
+          ) : null}
+        </h2>
       </div>
     </article>
   );

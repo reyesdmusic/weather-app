@@ -5,6 +5,7 @@ import useDebounce from "../../hooks/useDebounce";
 import Autocomplete from "react-autocomplete";
 import { CiLocationOn, CiSearch } from "react-icons/ci";
 import { Forecast, Snapshot, LocationOption } from "../../../../shared-types";
+import handleError from "../../utils/handleError";
 
 interface Location {
   lat: string;
@@ -34,6 +35,9 @@ function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
         .then((response) => {
           const locations: LocationOption[] = response?.data;
           setLocationOptions(locations);
+        })
+        .catch((e) => {
+          handleError(e);
         });
     }
 
@@ -65,8 +69,9 @@ function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
         const snapshot: Snapshot = response?.data;
         setSnapshot(snapshot);
       })
-      .catch(() => {
+      .catch((e) => {
         setError(true);
+        handleError(e);
         setSearch("");
         setSelectedLocationName("");
       });
@@ -77,8 +82,9 @@ function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
         const forecast: Forecast = response?.data;
         setForecast(forecast);
       })
-      .catch(() => {
+      .catch((e) => {
         setError(true);
+        handleError(e);
       });
   }, [selectedLocationName]);
 
@@ -95,8 +101,9 @@ function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
         setSearch("");
         setSnapshot(response.data);
       })
-      .catch(() => {
+      .catch((e) => {
         setError(true);
+        handleError(e);
       });
 
     axios
@@ -105,8 +112,9 @@ function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
         const forecast: Forecast = response?.data;
         setForecast(forecast);
       })
-      .catch(() => {
+      .catch((e) => {
         setError(true);
+        handleError(e);
       });
   }, [geoLocation]);
 
@@ -134,8 +142,11 @@ function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
   return (
     <header className="search-form">
       <div className="search-input-container" onKeyUp={(e) => onKeyUp(e)}>
-        <label className={isFocused ? "label-focused" : ""}>Location</label>
+        <label htmlFor="input" className={isFocused ? "label-focused" : ""}>
+          Location
+        </label>
         <Autocomplete
+          id="input"
           getItemValue={(item) => item?.label}
           items={locationOptions.map((locationOption: LocationOption) => {
             const { name, state, lat, lon } = locationOption;
@@ -158,7 +169,7 @@ function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
               key={`${item.label}-${item.latitude}-${item.longitude}`}
               style={{
                 background: isHighlighted
-                  ? "var(--accent)"
+                  ? "var(--accent-light)"
                   : "var(--background)",
                 cursor: "pointer",
                 padding: "6px",
