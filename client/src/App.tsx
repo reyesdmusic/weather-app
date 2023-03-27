@@ -5,6 +5,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import SnapshotComponent from "./components/Snapshot/Snapshot";
 import WeatherInfo from "./components/WeatherInfo/WeatherInfo";
 import ForecastComponent from './components/Forecast/Forecast';
+import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import { Forecast, Snapshot } from "../../shared-types";
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
     <div className="page">
       <Search setSnapshot={setSnapshot} setError={setError} setIsLoading={setIsLoading} setForecast={setForecast} />
       {error ? (
-        <div>Sorry, couldn't find that location</div>
+        <ErrorMessage error={error} />
       ) : (
         <>
           <WeatherInfo snapshot={snapshot} />
