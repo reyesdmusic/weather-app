@@ -47,3 +47,7 @@ Weather data is fetched from [OpenWeatherMap](https://openweathermap.org/api)
 ### Error Handling
 
 - The handleError utils in the client and server are placeholders for more robust implementations of error logging and monitoring
+
+### Search
+
+- Supports search by zip or location name

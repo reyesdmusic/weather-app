@@ -11,9 +11,18 @@ app.get("/api/weather", (req: Request, res: Response) => {
 
   if (!location && (!lat || !lon)) return;
 
-  let url = lat && lon
-    ? `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${API_KEY}`
-    : `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=${API_KEY}`;
+  // Set URL to lat and lon when it's provided,
+  // if the location is a number set it to search by zip, 
+  // otherwise set it search by location name
+  let url;
+
+    if (lat && lon) {
+      url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${API_KEY}`
+    } else {
+      url = location && isNaN(+location)
+        ? `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=${API_KEY}`
+        : `https://api.openweathermap.org/data/2.5/weather?zip=${location}&units=imperial&appid=${API_KEY}`;
+    }
 
   axios
     .get(url)

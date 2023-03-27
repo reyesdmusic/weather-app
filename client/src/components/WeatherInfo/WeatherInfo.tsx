@@ -6,9 +6,7 @@ function WeatherInfo({ snapshot }) {
     <article className="weather-info">
       <div>
         {snapshot.main ? (
-          <h1 id="temp" className="temperature">
-            {snapshot.main.temp.toFixed()}°F
-          </h1>
+          <h1 className="temperature">{snapshot.main.temp.toFixed()}°F</h1>
         ) : null}
         <WeatherIcon snapshot={snapshot} />
         <h2 className="location-description-container">
