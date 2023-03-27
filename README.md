@@ -42,16 +42,20 @@ Location and Weather data is fetched from [OpenWeatherMap](https://openweatherma
 
 ### Error Handling
 
-- The handleError utils in the client and server are placeholders for more robust implementations of error logging and monitoring
-
-### Search Component
-
-Supports search by location or zip. Utilizes [react-autocomplete](https://www.npmjs.com/package/react-autocomplete) for autocomplete. On keydown, a debounced fetch is made to the locations api to populate the location options in the dropdown. When user selects an option or submits, that location gets sent to the weather and forecast endpoints.
+The handleError utils in the client and server are placeholders for more robust implementations of error logging and monitoring
 
 ### Geolocation
 
 [Geolocation.getCurrentPosition](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition) used for geolocation
 
+### Search Component
+
+Supports search by location or zip. Utilizes [react-autocomplete](https://www.npmjs.com/package/react-autocomplete) for autocomplete. On keydown, a debounced fetch is made to the locations api to populate the location options in the dropdown. When user selects an option or submits, that location gets sent to the weather and forecast endpoints.
+
 ### Forecast Component
 
 The forecast component utilizes [recharts](https://recharts.org/en-US/) to generate the data in a chart - displaying humidity and temparature data. Other data points can be added down the road.
+
+### WeatherIcon
+
+The WeatherIcon component is consumed by the WeatherInfo component. It's mapped to 18 different weather statuses, so that if the weather is "partly cloudy", for example, a "partly cloud" icon is rendered.
