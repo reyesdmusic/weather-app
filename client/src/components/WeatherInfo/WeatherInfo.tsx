@@ -4,7 +4,7 @@ import WeatherIcon from "../WeatherIcon/WeatherIcon";
 function WeatherInfo({snapshot}) {
 
   return (
-    <div className="weather-info"> 
+    <article className="weather-info"> 
       <div>
         {snapshot.main ? (
             <h1 className="temperature">
@@ -25,7 +25,7 @@ function WeatherInfo({snapshot}) {
           ) : null}   
         </div>
       </div>
-    </div>
+    </article>
   );
 }
 export default WeatherInfo;

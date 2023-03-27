@@ -121,7 +121,7 @@ function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
   }
 
   return (
-    <div className="search-form">
+    <header className="search-form">
       <div className="search-input-container" onKeyUp={(e) => onKeyUp(e)}>
         <label className={isFocused ? "label-focused" : ""}>Location</label>
         <Autocomplete
@@ -181,7 +181,7 @@ function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
       <button className="search-icon-button" aria-label="geolocate">
         <CiSearch className="search-icon" />
       </button>
-    </div>
+    </header>
   );
 }
 

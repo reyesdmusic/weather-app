@@ -2,11 +2,9 @@ import { useState } from "react";
 import "./App.css";
 import Search from "./components/Search/Search";
 import ClipLoader from "react-spinners/ClipLoader";
-import SnapshotComponent from "./components/Snapshot/Snapshot";
-import WeatherInfo from "./components/WeatherInfo/WeatherInfo";
-import ForecastComponent from './components/Forecast/Forecast';
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import { Forecast, Snapshot } from "../../shared-types";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
   const [snapshot, setSnapshot] = useState<Snapshot | {}>({});
@@ -17,15 +15,8 @@ function App() {
   return (
     <div className="page">
       <Search setSnapshot={setSnapshot} setError={setError} setIsLoading={setIsLoading} setForecast={setForecast} />
-      {error ? (
-        <ErrorMessage error={error} />
-      ) : (
-        <>
-          <WeatherInfo snapshot={snapshot} />
-          <SnapshotComponent snapshot={snapshot} />
-          <ForecastComponent forecast={forecast} />
-        </>
-      )}
+      <Dashboard error={error} snapshot={snapshot} forecast={forecast} />
+      <ErrorMessage error={error} />
       {isLoading 
         ? <ClipLoader color="var(--primary)" cssOverride={ { position: "absolute", top: "calc(50vh - 50px)" } }/>
         : null

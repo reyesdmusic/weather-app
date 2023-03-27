@@ -6,7 +6,7 @@ function Snapshot({ snapshot }) {
   return (
     <>
       {(
-        <div> 
+        <article> 
           {snapshot.name !== undefined && (
             <div className="snapshot">
               {snapshot.main ? (
@@ -36,7 +36,7 @@ function Snapshot({ snapshot }) {
               ) : null}
             </div>
           )}
-        </div>
+        </article>
       )}
     </>
   );
