@@ -98,6 +98,16 @@ function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
       .catch(() => {
         setError(true);
       });
+
+    axios
+      .get("/api/forecast", { params: { lat: latitude, lon: longitude } })
+      .then((response) => {
+        const forecast: Forecast = response?.data;
+        setForecast(forecast);
+      })
+      .catch(() => {
+        setError(true);
+      });
   }, [geoLocation]);
 
   function fetchGeolocation() {

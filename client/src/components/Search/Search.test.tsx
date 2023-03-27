@@ -5,10 +5,11 @@ import { render, screen } from "@testing-library/react";
 import Search from "./Search";
 
 test("message is shown when in error state", () => {
-  // render(
-  //   <Search setError={{}} setIsLoading={{}} setSnapshot={{}} setForecast={{}} />
-  // );
+  const { container } = render(
+    <Search setError={{}} setIsLoading={{}} setSnapshot={{}} setForecast={{}} />
+  );
+  const input = container.querySelector("input");
+  console.log(input);
 
-  // const errorMessage = screen?.getByText(`Sorry, couldn't find that location`);
-  expect(false).toBe(false);
+  expect(input).toBeTruthy();
 });

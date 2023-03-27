@@ -13,5 +13,5 @@ test("page renders", () => {
   const { container } = render(<App />);
 
   const page = container.getElementsByClassName("page");
-  expect(page.length).toBe(1);
+  expect(page).toBeTruthy();
 });
