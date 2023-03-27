@@ -128,8 +128,6 @@ function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
         <Autocomplete
           getItemValue={(item) => item?.label}
           items={locationOptions.map((locationOption: LocationOption) => {
-            if (!locationOption) return;
-
             const { name, state, lat, lon } = locationOption;
 
             const city = `${name || ""}`;
