@@ -146,7 +146,7 @@ function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
             return item;
           })}
           renderItem={(item, isHighlighted) => (
-            <div
+            <option
               key={`${item.label}-${item.latitude}-${item.longitude}`}
               style={{
                 background: isHighlighted
@@ -157,7 +157,7 @@ function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
               }}
             >
               {item.label}
-            </div>
+            </option>
           )}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -173,13 +173,17 @@ function Search({ setError, setIsLoading, setSnapshot, setForecast }) {
         />
         <button
           className="location-icon-button"
-          aria-label="geolocate"
+          aria-label="get current location"
           onClick={fetchGeolocation}
         >
           <CiLocationOn className="location-icon" />
         </button>
       </div>
-      <button className="search-icon-button" aria-label="geolocate">
+      <button
+        className="search-icon-button"
+        aria-label={`get weather data ${search ? `for ${search}` : ""}`}
+        onClick={onSubmit}
+      >
         <CiSearch className="search-icon" />
       </button>
     </header>

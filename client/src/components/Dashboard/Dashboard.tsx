@@ -6,7 +6,6 @@ import "./Dashboard.css";
 function Dashboard({ error, snapshot, forecast }) {
   if (error) return null;
 
-    
   return (
     <>
       <WeatherInfo snapshot={snapshot} />

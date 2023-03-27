@@ -5,7 +5,7 @@ function ErrorMessage({ error }) {
 
     
   return (
-    <div className="error-message">
+    <div role="alert" className="error-message">
         Sorry, couldn't find that location
     </div>
   );
