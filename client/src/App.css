@@ -1,4 +1,43 @@
-:root {
+html,
+#root,
+body {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  height: 100vh;
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+  height: auto;
+  flex-grow: 1;
+}
+
+.page.dark {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  --primary: rgb(41, 216, 251);
+  --primary-light: rgb(162, 122, 255);
+  --secondary: rgb(255, 42, 241);
+  --secondary-light: rgb(250, 100, 240);
+  --accent: rgb(44, 16, 135);
+  --accent-light: rgb(47, 26, 115);
+  --accent-md: rgb(132, 132, 132);
+  --accent-dark: rgb(213, 213, 213);
+  --accent-extra-dark: rgb(238, 238, 238);
+  --background: rgb(15, 18, 60);
+  background: linear-gradient(90deg, rgb(15, 18, 60) 30%, rgb(32, 0, 96) 100%);
+  color: var(--accent-extra-dark);
+}
+
+.page {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   font-size: 16px;
@@ -12,11 +51,5 @@
   --accent-dark: rgb(111, 111, 111);
   --accent-extra-dark: rgb(80, 80, 80);
   --background: white;
-}
-
-.page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 12px;
+  background: var(--background);
 }

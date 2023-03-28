@@ -5,6 +5,7 @@ function Spinner({ isLoading }) {
 
   return (
     <ClipLoader
+      className="spinner"
       color="var(--primary)"
       cssOverride={{ position: "absolute", top: "calc(50vh - 50px)" }}
     />

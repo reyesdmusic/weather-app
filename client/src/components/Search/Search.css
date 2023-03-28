@@ -33,11 +33,16 @@ input {
   border-radius: 50px;
   padding-left: 10px;
   padding-right: 10px;
+  background: none;
+  color: var(--accent-extra-dark);
 }
 
 input + div {
   margin-top: 3px;
   border-radius: 5px;
+  background: none !important;
+  position: relative;
+  z-index: 3;
 }
 
 input:focus {
@@ -45,14 +50,8 @@ input:focus {
   outline: 2px solid var(--primary);
 }
 
-input:placeholder-shown {
-  background-color: ivory;
-  border: 2px solid darkorange;
-  border-radius: 5px;
-}
-
 .search-input-container {
-  margin-top: 30px;
+  margin-top: 50px;
   width: 100%;
   max-width: 400px;
   height: 40px;
@@ -60,11 +59,11 @@ input:placeholder-shown {
 }
 
 .label-focused {
-  transform: translate(12px, -8px);
-  background-color: var(--background);
+  transform: translate(12px, -10px);
   color: var(--primary);
   font-size: 12px;
   padding: 0px 2px;
+  background-color: var(--background);
 }
 
 .location-icon {
@@ -91,6 +90,6 @@ input:placeholder-shown {
 }
 
 .search-icon-button {
-  margin-top: 20px;
+  margin-top: 41px;
   margin-left: 12px;
 }
