@@ -10,21 +10,21 @@
 }
 
 .description {
-  font-size: 18px;
+  font-size: var(--size-md);
   font-weight: 400;
 }
 
 .location-name {
-  font-size: 24px;
+  font-size: var(--size-lg);
   font-weight: 400;
   overflow: wrap;
   border-right: 1px solid var(--primary);
   width: 50%;
-  padding-right: 12px;
+  padding-right: var(--size-sm);
 }
 
 .temperature {
-  font-size: 120px;
+  font-size: var(--size-jumbo);
   margin: 25px 0px;
   color: var(--primary);
   font-weight: 900;

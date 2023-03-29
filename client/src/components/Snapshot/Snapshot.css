@@ -1,6 +1,6 @@
 .snapshot {
-  margin-top: 24px;
-  border-radius: 18px;
+  margin-top: var(--size-lg);
+  border-radius: var(--size-md);
   display: flex;
   justify-content: space-between;
   text-align: center;
@@ -8,26 +8,26 @@
 }
 
 .snapshot-item {
-  font-size: 10px;
+  font-size: var(--size-extra-sm);
   border-radius: 100%;
   width: 60px;
   height: 60px;
   border: 1px solid var(--accent);
   display: flex;
   flex-direction: column;
-  padding: 15px;
+  padding: var(--size-sm-plus);
   text-align: center;
   justify-content: center;
   align-items: center;
 }
 
 .snapshot-icon {
-  font-size: 30px;
+  font-size: var(--size-extra-lg);
   color: var(--accent-extra-dark);
 }
 
 .snapshot-data {
-  font-size: 18px;
+  font-size: var(--size-md);
 }
 
 .location-description-container {
@@ -39,9 +39,9 @@
 .description {
   height: 100%;
   width: 50%;
-  padding-left: 12px;
+  padding-left: var(--size-sm);
 }
 
 .mph {
-  font-size: 12px;
+  font-size: var(--size-sm);
 }

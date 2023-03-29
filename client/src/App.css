@@ -8,6 +8,14 @@ body {
   margin: 0px;
   display: flex;
   flex-direction: column;
+  --size-jumbo: 120px;
+  --size-extra-lg: 30px;
+  --size-lg: 24px;
+  --size-md-plus: 20px;
+  --size-md: 18px;
+  --size-sm-plus: 14px;
+  --size-sm: 12px;
+  --size-extra-sm: 10px;
 }
 
 .page {

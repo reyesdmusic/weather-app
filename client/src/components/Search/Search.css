@@ -1,7 +1,7 @@
 button {
   border-radius: 100%;
-  width: 20px;
-  height: 20px;
+  width: var(--size-md-plus);
+  height: var(--size-md-plus);
   background: none;
   border: none;
   padding: 0px;
@@ -28,11 +28,11 @@ input {
   display: inline-block;
   width: calc(100% - 20px);
   border: 1px solid var(--accent-md);
-  height: 30px;
+  height: var(--size-extra-lg);
   font-size: 16px;
   border-radius: 50px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: var(--size-extra-sm);
+  padding-right: var(--size-extra-sm);
   background: none;
   color: var(--accent-extra-dark);
 }
@@ -61,14 +61,14 @@ input:focus {
 .label-focused {
   transform: translate(12px, -10px);
   color: var(--primary);
-  font-size: 12px;
+  font-size: var(--size-extra-sm);
   padding: 0px 2px;
   background-color: var(--background);
 }
 
 .location-icon {
   color: var(--primary);
-  font-size: 20px;
+  font-size: var(--size-md-plus);
 }
 
 .location-icon-button {
@@ -86,7 +86,7 @@ input:focus {
 
 .search-icon {
   color: var(--primary);
-  font-size: 20px;
+  font-size: var(--size-md-plus);
 }
 
 .search-icon-button {
