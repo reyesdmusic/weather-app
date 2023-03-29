@@ -1,0 +1,10 @@
+GET http://localhost:5001/api/weather?location=richmond
+###
+
+GET http://localhost:5001/api/weather?location=23227
+###
+
+GET http://localhost:5001/api/weather?lat=33.3994776&lon=-110.87095
+###
+
+GET http://localhost:5001/api/location?location=richmond,+virginia
